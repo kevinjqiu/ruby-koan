@@ -31,7 +31,7 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 def score(dice)
   def num_of_x(dice, x)
-    return (dice.collect { |num| x == num }).length
+    return (dice.select { |num| x == num }).length
   end
   score = 0
   num_of = Hash.new(0)
@@ -50,8 +50,8 @@ def score(dice)
       score += i * 100
       num_of[i] -= 3
     end
-    if i == 5 and num_of[5] == 1
-      score += 50
+    if i == 5 and num_of[5] >= 1
+      score += 50 * num_of[5]
     end
   end
   score
